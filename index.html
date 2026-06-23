@@ -173,7 +173,9 @@
             <div class="detail-item"><strong>When:</strong> Tonight at 7:30 PM</div>
         </div>
 
-        <form name="sydney-rsvp" method="POST" data-netlify="true">
+        <form name="sydney-rsvp" method="POST" data-netlify="true" action="/?success=true">
+            <input type="hidden" name="form-name" value="sydney-rsvp" />
+
             <label for="name">Your Name</label>
             <input type="text" id="name" name="name" value="Sydney" required>
 
@@ -192,6 +194,13 @@
             <button type="submit">Send Response</button>
         </form>
     </div>
+
+    <script>
+        if (window.location.search.includes('success=true')) {
+            alert("Response sent! Can't wait. ✨");
+            window.history.replaceState({}, document.title, window.location.pathname);
+        }
+    </script>
 
 </body>
 </html>
