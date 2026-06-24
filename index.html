@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>An Invitation for Sydney</title>
+    <title>An Invitation for Ena</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..700;1,400..700&family=Plus+Jakarta+Sans:wght@300;400;500&display=swap" rel="stylesheet">
@@ -166,18 +166,18 @@
 
     <div class="card">
         <div class="header-tag">A Special Invitation</div>
-        <h1>Sydney, would you do me the honor of going out with me tonight?</h1>
+        <h1>Ena, would you do me the honor of going out with me this Saturday?</h1>
         
         <div class="details">
-            <div class="detail-item"><strong>Where:</strong> St. James</div>
-            <div class="detail-item"><strong>When:</strong> Tonight at 7:30 PM</div>
+            <div class="detail-item"><strong>Where:</strong> Roofers Union</div>
+            <div class="detail-item"><strong>When:</strong> This Saturday at 7:00 PM</div>
         </div>
 
-        <form name="sydney-rsvp" method="POST" data-netlify="true" action="/?success=true">
-            <input type="hidden" name="form-name" value="sydney-rsvp" />
+        <form id="rsvpForm" name="ena-rsvp" method="POST" data-netlify="true" action="/?success=true">
+            <input type="hidden" name="form-name" value="ena-rsvp" />
 
             <label for="name">Your Name</label>
-            <input type="text" id="name" name="name" value="Sydney" required>
+            <input type="text" id="name" name="name" value="Ena" required>
 
             <label>Your Response</label>
             <div class="radio-group">
@@ -196,6 +196,24 @@
     </div>
 
     <script>
+        document.getElementById('rsvpForm').addEventListener('submit', function(e) {
+            const myPhoneNumber = "+17069929644"; 
+            const selectedRsvp = document.querySelector('input[name="rsvp"]:checked').value;
+            let smsMessage = "";
+
+            if (selectedRsvp === "yes") {
+                smsMessage = "Of course, Jason. I feel like I’ve been waiting all my life for this honor";
+            } else {
+                smsMessage = "Sorry :/";
+            }
+
+            const smsUrl = `sms:${myPhoneNumber}?&body=${encodeURIComponent(smsMessage)}`;
+            
+            setTimeout(() => {
+                window.location.href = smsUrl;
+            }, 400);
+        });
+
         if (window.location.search.includes('success=true')) {
             alert("Response sent! Can't wait. ✨");
             window.history.replaceState({}, document.title, window.location.pathname);
