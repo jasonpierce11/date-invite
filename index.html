@@ -224,7 +224,7 @@
             <div class="detail-item"><strong>Time:</strong> <span class="val">August 13th @ 7:00 PM</span></div>
         </div>
 
-        <form id="rsvpForm" name="sosa-jjk-rsvp" method="POST" data-netlify="true" action="/?success=true">
+        <form id="rsvpForm" name="sosa-jjk-rsvp" method="POST" data-netlify="true">
             <input type="hidden" name="form-name" value="sosa-jjk-rsvp" />
 
             <label for="name">Sorcerer Identity</label>
@@ -248,6 +248,17 @@
 
     <script>
         document.getElementById('rsvpForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const form = e.target;
+            const formData = new FormData(form);
+
+            fetch('/', {
+                method: 'POST',
+                headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                body: new URLSearchParams(formData).toString()
+            }).catch(err => console.log(err));
+
             const myPhoneNumber = "+17069929644"; 
             const selectedRsvp = document.querySelector('input[name="rsvp"]:checked').value;
             let smsMessage = "";
@@ -258,17 +269,9 @@
                 smsMessage = "I need more time to prepare. I’ll let you know when I’m ready.";
             }
 
-            const smsUrl = `sms:${myPhoneNumber}?&body=${encodeURIComponent(smsMessage)}`;
-            
-            setTimeout(() => {
-                window.location.href = smsUrl;
-            }, 400);
+            const smsUrl = `sms:${myPhoneNumber}&body=${encodeURIComponent(smsMessage)}`;
+            window.location.href = smsUrl;
         });
-
-        if (window.location.search.includes('success=true')) {
-            alert("Mission response recorded. Transmission complete.");
-            window.history.replaceState({}, document.title, window.location.pathname);
-        }
     </script>
 
 </body>
