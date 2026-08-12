@@ -3,17 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>An Invitation for Ena</title>
+    <title>Jujutsu High Dispatch // Mission Order</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..700;1,400..700&family=Plus+Jakarta+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-color: #fdfbf7;
-            --text-main: #2b2625;
-            --text-muted: #706563;
-            --accent: #ca764b;
-            --accent-light: #f7ede6;
+            --bg-color: #0b0b0e;
+            --card-bg: #13131a;
+            --text-main: #f0f0f5;
+            --text-muted: #8e8e9f;
+            --crimson: #ff2a4b;
+            --crimson-glow: rgba(255, 42, 75, 0.15);
+            --gold: #d4af37;
+            --border-color: #262636;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -31,49 +34,87 @@
         }
 
         .card {
-            background: #ffffff;
+            background: var(--card-bg);
             padding: 45px 30px;
             border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(202, 118, 75, 0.04);
-            max-width: 400px;
+            box-shadow: 0 0 35px var(--crimson-glow);
+            max-width: 420px;
             width: 100%;
             text-align: center;
-            border: 1px solid rgba(247, 237, 230, 0.9);
+            border: 1px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--crimson), var(--gold));
         }
 
         .header-tag {
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             text-transform: uppercase;
-            letter-spacing: 0.2em;
-            color: var(--accent);
-            font-weight: 600;
-            margin-bottom: 24px;
+            letter-spacing: 0.25em;
+            color: var(--crimson);
+            font-weight: 700;
+            margin-bottom: 20px;
+            display: inline-block;
+            padding: 4px 12px;
+            background: rgba(255, 42, 75, 0.1);
+            border: 1px solid rgba(255, 42, 75, 0.3);
+            border-radius: 4px;
         }
 
         h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.2rem;
-            font-weight: 500;
-            font-style: italic;
+            font-family: 'Cinzel', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
             line-height: 1.3;
+            margin-bottom: 20px;
+            color: #ffffff;
+            letter-spacing: 0.02em;
+        }
+
+        p.briefing {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.6;
             margin-bottom: 24px;
-            color: var(--text-main);
+        }
+
+        .briefing span.highlight {
+            color: var(--crimson);
+            font-weight: 600;
         }
 
         .details {
-            margin: 28px 0;
-            padding: 20px 0;
-            border-top: 1px solid var(--accent-light);
-            border-bottom: 1px solid var(--accent-light);
+            margin: 24px 0;
+            padding: 18px 0;
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+            text-align: left;
         }
 
         .detail-item {
-            margin: 14px 0;
-            font-size: 0.95rem;
+            margin: 12px 0;
+            font-size: 0.9rem;
             color: var(--text-muted);
+            display: flex;
+            justify-content: space-between;
         }
 
         .detail-item strong {
+            color: var(--gold);
+            font-weight: 600;
+            font-family: 'Cinzel', serif;
+        }
+
+        .detail-item span.val {
             color: var(--text-main);
             font-weight: 600;
         }
@@ -84,7 +125,7 @@
             display: block;
             font-size: 0.75rem;
             text-transform: uppercase;
-            letter-spacing: 0.08em;
+            letter-spacing: 0.1em;
             margin-bottom: 8px;
             color: var(--text-muted);
             font-weight: 600;
@@ -93,9 +134,9 @@
         input[type="text"] {
             width: 100%;
             padding: 14px;
-            border: 1px solid #ebdcd5;
+            border: 1px solid var(--border-color);
             border-radius: 10px;
-            background-color: #faf8f5;
+            background-color: #0b0b0e;
             font-family: inherit;
             font-size: 0.95rem;
             color: var(--text-main);
@@ -105,9 +146,8 @@
 
         input[type="text"]:focus {
             outline: none;
-            border-color: var(--accent);
-            background-color: #ffffff;
-            box-shadow: 0 0 0 3px rgba(202, 118, 75, 0.15);
+            border-color: var(--crimson);
+            box-shadow: 0 0 10px var(--crimson-glow);
         }
 
         .radio-group {
@@ -129,69 +169,79 @@
         .radio-label {
             display: block;
             text-align: center;
-            padding: 14px;
-            border: 1px solid #ebdcd5;
+            padding: 14px 8px;
+            border: 1px solid var(--border-color);
             border-radius: 10px;
-            font-size: 0.9rem;
-            background: #ffffff;
+            font-size: 0.85rem;
+            background: #1a1a24;
+            color: var(--text-main);
             cursor: pointer;
             transition: all 0.2s ease;
+            font-weight: 600;
         }
 
         .radio-btn input[type="radio"]:checked + .radio-label {
-            background-color: var(--accent-light);
-            border-color: var(--accent);
-            color: var(--accent);
-            font-weight: 600;
+            background-color: rgba(255, 42, 75, 0.15);
+            border-color: var(--crimson);
+            color: var(--crimson);
+            box-shadow: 0 0 12px var(--crimson-glow);
         }
 
         button {
             width: 100%;
             padding: 16px;
-            background-color: var(--text-main);
+            background: linear-gradient(135deg, var(--crimson), #b3122b);
             color: #ffffff;
             border: none;
             border-radius: 10px;
-            font-family: inherit;
+            font-family: 'Cinzel', serif;
             font-size: 0.95rem;
-            font-weight: 600;
+            font-weight: 700;
+            letter-spacing: 0.08em;
             cursor: pointer;
             transition: opacity 0.2s ease;
+            box-shadow: 0 4px 20px var(--crimson-glow);
         }
 
-        button:hover { opacity: 0.95; }
+        button:hover { opacity: 0.9; }
     </style>
 </head>
 <body>
 
     <div class="card">
-        <div class="header-tag">A Special Invitation</div>
-        <h1>Ena, would you do me the honor of going out with me this Saturday?</h1>
+        <div class="header-tag">JUJUTSU HIGH DISPATCH // TOP SECRET</div>
+        <h1>SPECIAL GRADE MISSION ORDER</h1>
         
+        <p class="briefing">
+            Emergency deployment required for <span class="highlight">Special Grade Sorcerer Sosa</span>. A high-level, dangerously charismatic <span class="highlight">Special Grade Cursed Entity (Jason)</span> has manifested at the designated coordinates. Immediate containment recommended.
+        </p>
+
         <div class="details">
-            <div class="detail-item"><strong>Where:</strong> Roofers Union</div>
-            <div class="detail-item"><strong>When:</strong> This Saturday at 7:00 PM</div>
+            <div class="detail-item"><strong>Sorcerer:</strong> <span class="val">Sosa (Special Grade)</span></div>
+            <div class="detail-item"><strong>Target Entity:</strong> <span class="val">Jason (Special Grade)</span></div>
+            <div class="detail-item"><strong>Location:</strong> <span class="val">[Insert Restaurant]</span></div>
+            <div class="detail-item"><strong>Time:</strong> <span class="val">[Insert Day & Time]</span></div>
         </div>
 
-        <form id="rsvpForm" name="ena-rsvp" method="POST" data-netlify="true" action="/?success=true">
-            <input type="hidden" name="form-name" value="ena-rsvp" />
+        <form id="rsvpForm" name="sosa-jjk-rsvp" method="POST" data-netlify="true" action="/?success=true">
+            <input type="hidden" name="form-name" value="sosa-jjk-rsvp" />
 
-            <label for="name">Your Name</label>
-            <input type="text" id="name" name="name" value="Ena" required>
+            <label for="name">Sorcerer Identity</label>
+            <input type="text" id="name" name="name" value="Sosa" required>
 
-            <label>Your Response</label>
+            <label>Mission Confirmation</label>
             <div class="radio-group">
                 <div class="radio-btn">
                     <input type="radio" id="yes" name="rsvp" value="yes" required>
-                    <label for="yes" class="radio-label">Count me in ✨</label>
+                    <label for="yes" class="radio-label">Accept Mission ☯️</label>
                 </div>
                 <div class="radio-btn">
                     <input type="radio" id="no" name="rsvp" value="no" required>
-                    <label for="no" class="radio-label">Can't make it 🤍</label>
+                    <label for="no" class="radio-label">Decline Mission 🚫</label>
                 </div>
             </div>
 
-            <button type="submit">Send Response</button>
+            <button type="submit">TRANSMIT ORDER</button>
         </form>
     </div>
 
@@ -202,9 +252,9 @@
             let smsMessage = "";
 
             if (selectedRsvp === "yes") {
-                smsMessage = "Of course, Jason. I feel like I’ve been waiting all my life for this honor";
+                smsMessage = "Mission accepted. Special Grade Sorcerer Sosa is en route to contain the Special Grade Curse (Jason). Prepare for battle.";
             } else {
-                smsMessage = "Sorry :/";
+                smsMessage = "Mission failed: Domain Expansion unavailable. Sorcerer Sosa is out of cursed energy :/";
             }
 
             const smsUrl = `sms:${myPhoneNumber}?&body=${encodeURIComponent(smsMessage)}`;
@@ -215,7 +265,7 @@
         });
 
         if (window.location.search.includes('success=true')) {
-            alert("Response sent! Can't wait. ✨");
+            alert("Mission response recorded. Transmission complete.");
             window.history.replaceState({}, document.title, window.location.pathname);
         }
     </script>
