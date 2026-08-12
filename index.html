@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jujutsu High Dispatch // Mission Order</title>
+    <title>Special Grade Request</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
@@ -85,6 +85,7 @@
             color: var(--text-muted);
             line-height: 1.6;
             margin-bottom: 24px;
+            text-align: left;
         }
 
         .briefing span.highlight {
@@ -210,17 +211,16 @@
 
     <div class="card">
         <div class="header-tag">JUJUTSU HIGH DISPATCH // TOP SECRET</div>
-        <h1>SPECIAL GRADE MISSION ORDER</h1>
+        <h1>SPECIAL GRADE REQUEST</h1>
         
         <p class="briefing">
-            Emergency deployment required for <span class="highlight">Special Grade Sorcerer Sosa</span>. A high-level, dangerously charismatic <span class="highlight">Special Grade Cursed Entity (Jason)</span> has manifested at the designated coordinates. Immediate containment recommended.
+            An unregistered Special Grade Curse has been detected in Northwest Washington DC. It has deployed its own veil and has trapped several dozen non-sorcerers inside. Strangely, intelligence suggests nine inside have been harmed. The Special Grade (calling itself “Jason”) has requested you by name to confront him.
         </p>
 
         <div class="details">
             <div class="detail-item"><strong>Sorcerer:</strong> <span class="val">Sosa (Special Grade)</span></div>
             <div class="detail-item"><strong>Target Entity:</strong> <span class="val">Jason (Special Grade)</span></div>
-            <div class="detail-item"><strong>Location:</strong> <span class="val">[Insert Restaurant]</span></div>
-            <div class="detail-item"><strong>Time:</strong> <span class="val">[Insert Day & Time]</span></div>
+            <div class="detail-item"><strong>Location:</strong> <span class="val">Northwest Washington, DC</span></div>
         </div>
 
         <form id="rsvpForm" name="sosa-jjk-rsvp" method="POST" data-netlify="true" action="/?success=true">
@@ -252,9 +252,9 @@
             let smsMessage = "";
 
             if (selectedRsvp === "yes") {
-                smsMessage = "Mission accepted. Special Grade Sorcerer Sosa is en route to contain the Special Grade Curse (Jason). Prepare for battle.";
+                smsMessage = "I’ve heard legends about this curse. Terrifyingly powerful. However, I accept";
             } else {
-                smsMessage = "Mission failed: Domain Expansion unavailable. Sorcerer Sosa is out of cursed energy :/";
+                smsMessage = "I need more time to prepare. I’ll let you know when I’m ready.";
             }
 
             const smsUrl = `sms:${myPhoneNumber}?&body=${encodeURIComponent(smsMessage)}`;
